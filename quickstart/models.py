@@ -14,5 +14,11 @@ class Pets(models.Model):
         ('O', 'Others'),
     )
 
+    PET_TYPE = (
+        ('C', 'Cat'),
+        ('D', 'Dog'),
+    )
+
     name = models.CharField(max_length=255, **optional)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES, **optional)
+    animal_type = models.CharField(max_length=2, choices=PET_TYPE, **optional)

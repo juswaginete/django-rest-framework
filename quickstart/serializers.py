@@ -1,14 +1,34 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
+from .models import Pets
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+
+class PetsSerializer(serializers.ModelSerializer):
+    """
+    Serializer class for Pets model
+    """
+
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
+        model = Pets
+        fields = '__all__'
 
+    def create_pet(self, validated_data):
+        name = self.data.get('name')
+        gender = self.data.get('gender')
+        animal_type = self.data.get('animal_type')
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
+        pet = Pets(
+            name=name,
+            gender=gender,
+            animal_type=animal_type
+        )
+
+        pet.save()
+
+        return {
+            "id": pet.id,
+            "name": pet.name,
+            "gender": pet.gender,
+            "animal_type": pet.animal_type
+        }
