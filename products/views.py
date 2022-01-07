@@ -36,6 +36,12 @@ class ProductsView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ProductObjectView(APIView):
+    """
+    Handles the api endpoint for getting specific product
+    """
+
     def get_object(self, pk):
         try:
             return Products.objects.get(pk=pk)
@@ -45,8 +51,6 @@ class ProductsView(APIView):
                 'error': 'True',
                 'message': 'Product not found'
             }, status=status.HTTP_404_NOT_FOUND)
-            raise Http404
-            
 
     def get(self, request, pk, format=None):
         """
