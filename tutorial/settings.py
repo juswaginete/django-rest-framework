@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'quickstart',
 
     'rest_framework',
+    'products',
 ]
 
 MIDDLEWARE = [
