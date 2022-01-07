@@ -22,27 +22,7 @@ class ProductsSerializer(serializers.ModelSerializer):
 
         product_type = ProductsType.objects.get(id=product_type_id)
 
-        # try:
-        #     product = Products(
-        #         name=name,
-        #         quantity=quantity,
-        #         price=price,
-        #         product_type=product_type
-        #     )
-
-        #     product.save()
-
-        #     return {
-        #         "id": product.id,
-        #         "name": product.name,
-        #         "quantity": product.quantity,
-        #         "price": product.price,
-        #         "product_type": product.product_type.id
-        #     }
-        # except Exception as e:
-        #     raise e
-
-        if product_type:
+        try:
             product = Products(
                 name=name,
                 quantity=quantity,
@@ -64,6 +44,31 @@ class ProductsSerializer(serializers.ModelSerializer):
                     "date_updated": product.product_type.date_updated,
                 }
             }
+        except Exception as e:
+            raise e
+
+        # if product_type:
+        #     product = Products(
+        #         name=name,
+        #         quantity=quantity,
+        #         price=price,
+        #         product_type=product_type
+        #     )
+
+        #     product.save()
+
+        #     return {
+        #         "id": product.id,
+        #         "name": product.name,
+        #         "quantity": product.quantity,
+        #         "price": product.price,
+        #         "product_type": {
+        #             "id": product.product_type.id,
+        #             "type_name": product.product_type.type_name,
+        #             "date_created": product.product_type.date_created,
+        #             "date_updated": product.product_type.date_updated,
+        #         }
+        #     }
 
 
 
